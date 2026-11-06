@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PreventPrint
 
-## Getting Started
+**An open library of low-cost DIY blueprints against air, water, soil and chemical contamination.**
 
-First, run the development server:
+PreventPrint collects practical, buildable solutions that schools, workshops and households can use to notice and reduce everyday pollution risks. It supports UN Sustainable Development Goal 3, Target 3.9: reducing illness and death from hazardous chemicals and from air, water and soil pollution.
+
+> 🇹🇷 PreventPrint; hava, su, toprak ve kimyasal kirliliğe karşı düşük maliyetli, kendin-yap çözümlerin açık bir kütüphanesidir. İçerik önce İngilizce, ardından Türkçe olarak sunulur.
+
+## What is a blueprint?
+
+Every blueprint follows the same six-part structure, so anyone can compare, build and improve it:
+
+1. **Health risk**: what the pollutant is, who is exposed and why it matters
+2. **Application and code**: electronics, wiring and source code (with a simulation where possible)
+3. **Mechanical design**: parts, enclosure, CAD files and assembly
+4. **Spatial placement**: where and how to install it in a real space
+5. **Cost and adoption**: bill of materials in TL and what it takes to adopt it
+6. **Limitations and safety**: what it cannot do and how to use it safely
+
+Blueprints can be filtered by **medium** (air, water, soil, chemicals), **setting** (school, home, workshop, outdoors) and **budget**.
+
+> ⚠️ DIY sensors give *indicators* that prompt action. They are not calibrated instruments and must not be used on their own for health decisions.
+
+## Tech stack
+
+- [Next.js](https://nextjs.org) (App Router, TypeScript, Tailwind CSS)
+- [Supabase](https://supabase.com) for the database, team login and file storage
+- [Vercel](https://vercel.com) for hosting; every push to `main` deploys automatically
+- English and Turkish with `next-intl`; machine translation via DeepL, always reviewable by hand
+
+## Getting started
+
+Requirements: Node.js 20 or newer and Git.
 
 ```bash
+git clone https://github.com/Bashkal/preventprint.git
+cd preventprint
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Once Supabase is connected, create a `.env.local` file in the project root (it is git-ignored):
 
-## Learn More
+```bash
+NEXT_PUBLIC_SUPABASE_URL=your-project-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+```
 
-To learn more about Next.js, take a look at the following resources:
+Never commit secret keys (such as the Supabase `service_role` key). Add them in the Vercel project settings instead.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project status
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This site is being built during the GLB 300 course (Fall 2026).
 
-## Deploy on Vercel
+- [ ] Site v0: home, blueprint list with filters, blueprint page, safety and contribute pages (13 Nov)
+- [ ] Blueprint 1: classroom air quality, with simulation (27 Nov)
+- [ ] Site v1: contribution form and machine translation (4 Dec)
+- [ ] Blueprint 3 and faculty review (11 Dec)
+- [ ] Project fair (25 Dec)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Ideas, corrections and new blueprints are welcome. Until the contribution form is live, please open an [issue](https://github.com/Bashkal/preventprint/issues) describing your solution and which of the six sections you can fill. Every blueprint is reviewed before it is published.
+
+## Team
+
+GLB 300, Group 1:
+
+- Mahmut Sami Başkal, Computer Engineering
+- Berat Kınık, Mechanical Engineering
+- Fatma Killik, Molecular Biology
+- Fatma Elif Özkan, Business
+- Duygu Karabıyık, Architecture
