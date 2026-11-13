@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { BLUEPRINTS, MEDIA, SETTINGS, type Medium, type Setting } from "@/lib/blueprints";
+import { MEDIA, SETTINGS, type Blueprint, type Medium, type Setting } from "@/lib/blueprints";
 import { BlueprintCard } from "./BlueprintRow";
 
 const BUDGETS = [
@@ -11,7 +11,7 @@ const BUDGETS = [
   { value: "2000", label: "Up to 2,000 TL" },
 ];
 
-export function BlueprintFilters() {
+export function BlueprintFilters({ blueprints }: { blueprints: Blueprint[] }) {
   const params = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -28,7 +28,7 @@ export function BlueprintFilters() {
     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
   }
 
-  const results = BLUEPRINTS.filter(
+  const results = blueprints.filter(
     (b) =>
       (!medium || b.medium === medium) &&
       (!setting || b.setting.includes(setting)) &&

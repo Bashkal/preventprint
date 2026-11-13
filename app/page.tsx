@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { BLUEPRINTS, MEDIA, SECTIONS } from "@/lib/blueprints";
+import { MEDIA, SECTIONS } from "@/lib/blueprints";
+import { getBlueprints } from "@/lib/data";
 import { DeviceIllustration } from "@/components/DeviceIllustration";
 import { BlueprintCard } from "@/components/BlueprintRow";
 import { CtaBand } from "@/components/CtaBand";
@@ -16,7 +17,9 @@ const sectionLines: Record<string, string> = {
   limitations_safety: "What it cannot do, and how to use it safely.",
 };
 
-export default function Home() {
+export default async function Home() {
+  const blueprints = await getBlueprints();
+
   return (
     <>
       <section className="hero-bg text-white">
@@ -60,7 +63,7 @@ export default function Home() {
         <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {MEDIA.map((m) => {
             const Icon = MEDIUM_ICONS[m.id];
-            const count = BLUEPRINTS.filter((b) => b.medium === m.id).length;
+            const count = blueprints.filter((b) => b.medium === m.id).length;
             return (
               <li key={m.id} className="card">
                 <Link href={`/blueprints?medium=${m.id}`} className="group block h-full p-6">
@@ -119,7 +122,7 @@ export default function Home() {
           </Link>
         </div>
         <ul className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {BLUEPRINTS.map((b) => (
+          {blueprints.map((b) => (
             <BlueprintCard key={b.slug} b={b} />
           ))}
         </ul>

@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { BlueprintFilters } from "@/components/BlueprintFilters";
+import { getBlueprints } from "@/lib/data";
 
 export const metadata: Metadata = { title: "Blueprints" };
 
-export default function BlueprintsPage() {
+export default async function BlueprintsPage() {
+  const blueprints = await getBlueprints();
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
       <h1 className="display text-3xl font-bold sm:text-4xl">Blueprints</h1>
@@ -13,7 +16,7 @@ export default function BlueprintsPage() {
       </p>
       <div className="mt-8">
         <Suspense fallback={<p className="text-ink-soft">Loading blueprints…</p>}>
-          <BlueprintFilters />
+          <BlueprintFilters blueprints={blueprints} />
         </Suspense>
       </div>
     </div>

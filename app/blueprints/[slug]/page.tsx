@@ -3,31 +3,31 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, CheckCircle2, CircleDashed, Clock, Coins, Leaf, School } from "lucide-react";
 import {
-  BLUEPRINTS,
   SECTIONS,
   completeSections,
   formatCost,
-  getBlueprint,
   settingName,
 } from "@/lib/blueprints";
+import { getBlueprint, getBlueprints } from "@/lib/data";
 import { MediumBadge } from "@/components/MediumTag";
 import { DeviceIllustration } from "@/components/DeviceIllustration";
 import { CtaBand } from "@/components/CtaBand";
 import { MEDIUM_ICONS, SECTION_ICONS } from "@/components/icons";
 
-export function generateStaticParams() {
-  return BLUEPRINTS.map((b) => ({ slug: b.slug }));
+export async function generateStaticParams() {
+  const blueprints = await getBlueprints();
+  return blueprints.map((b) => ({ slug: b.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps<"/blueprints/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const b = getBlueprint(slug);
+  const b = await getBlueprint(slug);
   return { title: b?.title ?? "Blueprint not found" };
 }
 
 export default async function BlueprintPage({ params }: PageProps<"/blueprints/[slug]">) {
   const { slug } = await params;
-  const b = getBlueprint(slug);
+  const b = await getBlueprint(slug);
   if (!b) notFound();
 
   const done = completeSections(b);
